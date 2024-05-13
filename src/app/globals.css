@@ -2,3 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+
+
+
+
+.background-gradient {
+    background: radial-gradient(
+      circle at top center,
+      hsla(222, 20%, 0%, 1) 0%,   /* Lighter shade of zinc */
+      hsla(222, 0%, 0%, 0) 50%,       /* Transparent middle */
+      hsla(222, 20%, 0%, 0) 100%   /* Darker shade of zinc */
+    );
+  }
+
+  .glass-nav {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(7px);
+    border-radius: 20px;
+    padding: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    box-shadow: 0 8px 32px 0 rgba(161, 161, 161, 0.37);
+  }
+
+  @media (max-width: 767px) {
+    /* Styles specific to smaller devices */
+    .glass-nav {
+      /* Remove glassmorphism effect for smaller devices */
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: none;
+      border-radius: 0;
+      padding: 0;
+    }
+  }
+
+  /* Define fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Define slide-in animation */
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Apply animations to elements */
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.5s ease forwards;
+}
+
+   
+  
+
