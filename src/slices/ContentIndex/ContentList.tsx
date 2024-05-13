@@ -1,5 +1,7 @@
+"use client"
+
 import React, { useRef, useState, useEffect } from "react";
-import { useRouter } from "next/router"; // Import useRouter
+// import { useClient } from "next/client";
 import { asImageSrc, isFilled } from "@prismicio/client";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -29,9 +31,11 @@ export default function ContentList({
   const [hovering, setHovering] = useState(false);
   const lastMousePos = useRef({ x: 0, y: 0 });
 
-  const router = useRouter(); // Initialize useRouter
+  
 
   const urlPrefix = contentType === "Blog" ? "/blog" : "/project";
+
+  // useClient();
 
 
   useEffect(() => {
