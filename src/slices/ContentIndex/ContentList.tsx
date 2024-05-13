@@ -1,6 +1,7 @@
-"use client";
+"use client"
 
 import React, { useRef, useState, useEffect } from "react";
+import { useClient } from "next/client"; // Import useClient
 import { asImageSrc, isFilled } from "@prismicio/client";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -23,7 +24,7 @@ export default function ContentList({
   viewMoreText = "Read More",
 }: ContentListProps) {
   const component = useRef(null);
-  const itemsRef = useRef<Array<HTMLLIElement | null>>([]);
+  const itemsRef = useRef<(HTMLLIElement | null)[]>([]);
 
   const revealRef = useRef(null);
   const [currentItem, setCurrentItem] = useState<null | number>(null);
@@ -31,6 +32,9 @@ export default function ContentList({
   const lastMousePos = useRef({ x: 0, y: 0 });
 
   const urlPrefix = contentType === "Blog" ? "/blog" : "/project";
+
+  // Mark the component as a Client Component
+  useClient();
 
   useEffect(() => {
     // Animate list-items in with a stagger
@@ -142,7 +146,9 @@ export default function ContentList({
         {items.map((post, index) => (
           <li
             key={index}
-            ref={(el) => (itemsRef.current[index] = el)}
+            ref={(el) => {
+              itemsRef.current[index] = el;
+            }}
             onMouseEnter={() => onMouseEnter(index)}
             className="list-item opacity-0"
           >
