@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
 import clsx from "clsx";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Content, KeyTextField, asLink } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
 import { MdMenu, MdClose } from "react-icons/md";
 import Button from "./Button";
 import { usePathname } from "next/navigation";
-import { gsap } from "gsap";
+
 
 export default function NavBar({
   settings,
@@ -16,46 +16,13 @@ export default function NavBar({
   settings: Content.SettingsDocument;
 }) {
   const [open, setOpen] = useState(false);
-  const [navVisible, setNavVisible] = useState(false);
   const pathname = usePathname();
-  const navRef = useRef(null);
 
-  useEffect(() => {
-    // Show navigation when component mounts
-    setNavVisible(true);
-  }, []);
-
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      gsap.from(navRef.current, {
-        x: -200,
-        y: -250,
-        z: -200,
-        duration: 3,
-        ease: "back.out(1.7)",
-      });
-    });
-    return () => ctx.revert(); // Cleanup
-  }, []);
-
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      gsap.to(navRef.current, {
-        opacity: 0.7,
-        duration: 0.3,
-        repeat: 1,
-        yoyo: true,
-        ease: "back.out(1.7)",
-      });
-    });
-    return () => ctx.revert(); // Cleanup
-  }, [pathname]);
 
   return (
-    <nav
+    <nav 
       aria-label="Main navigation"
-      className={clsx("glass-nav", { hidden: !navVisible })} // Hide navigation until it's ready
-      ref={navRef}
+      className=  "glass-nav"
     >
       <ul className="flex flex-col justify-between rounded-b-lg px-4 py-2 md:m-4 md:flex-row md:items-center md:rounded-xl">
         <div className="flex items-center justify-between">
@@ -63,7 +30,7 @@ export default function NavBar({
           <button
             aria-expanded={open}
             aria-label="Open menu"
-            className="block p-2 text-2xl text-zinc-800 md:hidden"
+            className="block p-2 text-2xl text-slate-50 md:hidden"
             onClick={() => setOpen(true)}
           >
             <MdMenu />
@@ -88,7 +55,7 @@ export default function NavBar({
               <li className="first:mt-8">
                 <PrismicNextLink
                   className={clsx(
-                    "group relative block overflow-hidden rounded px-3 text-3xl font-bold text-slate-50 ",
+                    "group relative block overflow-hidden rounded px-3 text-3xl font-bold text-slate-100 ",
                   )}
                   field={link}
                   onClick={() => setOpen(false)}
@@ -111,7 +78,7 @@ export default function NavBar({
               </li>
               {index < settings.data.nav_items.length - 1 && (
                 <span
-                  className="hidden text-4xl font-thin leading-[0] text-slate-400 md:inline"
+                  className="hidden text-4xl font-thin leading-[0] text-slate-100 md:inline"
                   aria-hidden="true"
                 >
                   /
@@ -138,7 +105,7 @@ function NameLogo({ name }: { name: KeyTextField }) {
     <Link
       href="/"
       aria-label="Home page"
-      className="text-xl font-extrabold tracking-tighter text-slate-50"
+      className="text-xl font-extrabold tracking-tighter text-slate-100"
     >
       {name}
     </Link>
